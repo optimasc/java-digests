@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML_DIZ_INFO>
+	<MASTER_PAD_VERSION_INFO>
+		<MASTER_PAD_VERSION>2.01</MASTER_PAD_VERSION>
+		<MASTER_PAD_EDITOR>PADGen 2.0.1.22 http://www.padgen.org</MASTER_PAD_EDITOR>
+		<MASTER_PAD_INFO>Portable Application Description, or PAD for short, is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://www.asp-shareware.org/pad</MASTER_PAD_INFO>
+	</MASTER_PAD_VERSION_INFO>
+	<Company_Info>
+		<Company_Name>Optima SC Inc.</Company_Name>
+		<Address_1 />
+		<Address_2 />
+		<City_Town>Montreal</City_Town>
+		<State_Province>Quebec</State_Province>
+		<Zip_Postal_Code />
+		<Country>Canada</Country>
+		<Company_WebSite_URL>http://www.optimasc.com</Company_WebSite_URL>
+		<Contact_Info>
+			<Author_First_Name>Carl Eric</Author_First_Name>
+			<Author_Last_Name>Codère</Author_Last_Name>
+			<Author_Email>info@optimasc.com</Author_Email>
+			<Contact_First_Name>Carl Eric</Contact_First_Name>
+			<Contact_Last_Name>Codère</Contact_Last_Name>
+			<Contact_Email>info@optimasc.com</Contact_Email>
+		</Contact_Info>
+		<Support_Info>
+			<Sales_Email>info@optimasc.com</Sales_Email>
+			<Support_Email>info@optimasc.com</Support_Email>
+			<General_Email>info@optimasc.com</General_Email>
+			<Sales_Phone />
+			<Support_Phone />
+			<General_Phone />
+			<Fax_Phone />
+		</Support_Info>
+	</Company_Info>
+	<Program_Info>
+		<Program_Name></Program_Name>
+		<Program_Version></Program_Version>
+		<Program_Release_Month></Program_Release_Month>
+		<Program_Release_Day></Program_Release_Day>
+		<Program_Release_Year></Program_Release_Year>
+		<Program_Cost_Dollars>0</Program_Cost_Dollars>
+		<Program_Cost_Other_Code />
+		<Program_Cost_Other />
+		<Program_Type>Freeware</Program_Type>
+		<Program_Release_Status>Minor Update</Program_Release_Status>
+		<Program_Install_Support>No Install Support</Program_Install_Support>
+		<Program_OS_Support>Win 3.1x,Win95,Win98,WinME,WinNT 3.x,WinNT 4.x,Windows2000,WinXP,Windows2003,Unix,Linux,MS-DOS,OS/2,OS/2 Warp,Mac PPC,Netware,BEOS</Program_OS_Support>
+		<Program_Language>English,French</Program_Language>
+		<Program_Change_Info>Support for Turbo Delphi and SGMLGetDTDInfo prototype changed, Documentation cleanup</Program_Change_Info>
+		<Program_Specific_Category>Miscellaneous</Program_Specific_Category>
+		<Program_Category_Class>Development::Components &amp; Libraries</Program_Category_Class>
+		<Program_Categories>Pascal units</Program_Categories>
+		<Program_System_Requirements>Pascal compiler</Program_System_Requirements>
+		<Includes_JAVA_VM>N</Includes_JAVA_VM>
+		<Includes_VB_Runtime>N</Includes_VB_Runtime>
+		<Includes_DirectX>N</Includes_DirectX>
+		<File_Info>
+			<Filename_Versioned />
+			<Filename_Previous />
+			<Filename_Generic />
+			<Filename_Long />
+			<File_Size_Bytes />
+			<File_Size_K />
+			<File_Size_MB />
+		</File_Info>
+		<Expire_Info>
+			<Has_Expire_Info>N</Has_Expire_Info>
+			<Expire_Count />
+			<Expire_Based_On>Days</Expire_Based_On>
+			<Expire_Other_Info />
+			<Expire_Month />
+			<Expire_Day />
+			<Expire_Year />
+		</Expire_Info>
+	</Program_Info>
+	<Program_Descriptions>
+		<English>
+			<Keywords>utilities,programming,pascal</Keywords>
+			<Char_Desc_45>Pascal utilities units (source code)</Char_Desc_45>
+			<Char_Desc_80>Pascal utilities units for several compilers (source code)</Char_Desc_80>
+			<Char_Desc_250>Source code of pascal units for porting code across different pascal compilers. Currently supports, Virtual Pascal, Delphi, Free Pascal and Turbo Pascal. Also includes some useful string handling routines and Unicode support. Fully portable code.</Char_Desc_250>
+			<Char_Desc_450>Source code of pascal units for porting code across different pascal compilers. Currently supports, Virtual Pascal, Delphi, Free Pascal and Turbo Pascal. Also includes some useful string handling routines, Unicode support, ISO 3601, ISO 639 and ISO 8601 based utility routines. Fully portable code.</Char_Desc_450>
+			<Char_Desc_2000>Source code of pascal units for porting code across different pascal compilers. Currently supports, Virtual Pascal, Delphi, Free Pascal and Turbo Pascal. Also includes some useful string handling routines, Unicode support, ISO 3601, ISO 639 and ISO 8601 based utility routines. Fully portable code.</Char_Desc_2000>
+		</English>
+	</Program_Descriptions>
+	<Web_Info>
+		<Application_URLs>
+			<Application_Info_URL>http://www.optimasc.com/products/utilities/</Application_Info_URL>
+			<Application_Order_URL />
+			<Application_Screenshot_URL />
+			<Application_Icon_URL />
+			<Application_XML_File_URL>http://www.optimasc.com/products/utilities/pad_file.xml</Application_XML_File_URL>
+		</Application_URLs>
+		<Download_URLs>
+			<Primary_Download_URL></Primary_Download_URL>
+			<Secondary_Download_URL />
+			<Additional_Download_URL_1 />
+			<Additional_Download_URL_2 />
+		</Download_URLs>
+	</Web_Info>
+	<Permissions>
+		<Distribution_Permissions />
+		<EULA>Copyright (c) 2005-2008 Optima SC Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, 
+with or without modification in commercial and 
+non-commercial packages/software, are permitted 
+provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above 
+copyright notice, this list of conditions and the 
+following disclaimer.
+
+2. Redistributions in binary form must reproduce the 
+above copyright notice, this list of conditions and the
+following disclaimer in the documentation and/or other 
+materials provided with the distribution.
+
+3. The end-user documentation included with the 
+redistribution, if any, must include the following 
+acknowledgment:
+
+"This product includes software developed by 
+Carl Eric Codere of Optima SC Inc."
+
+Alternately, this acknowledgment may appear in the 
+software itself, if and wherever such third-party 
+acknowledgments normally appear.
+
+4. The names "Optima SC Inc." and "Carl Eric Codère" must 
+not be used to endorse or promote products derived from 
+this software without prior written permission. 
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR 
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+OPTIMA SC INC. OR ITS CONTRIBUTORS BE LIABLE FOR ANY 
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</EULA>
+	</Permissions>
+</XML_DIZ_INFO>

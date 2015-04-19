@@ -1,0 +1,387 @@
+<project name="Template" default="dist" basedir=".">
+
+
+<!--
+
+  This documents this build.xml file and explains the properties
+  file associated with each project. Each pascal project contains
+  a project.properties which defines information on how to build and
+  how to build the application. 
+  
+  PRE_REQUISITES:
+   General:
+     -> javadoc installed and in your path environment
+     -> javac    installed and in your path environment
+     -> junit.jar and ant-junit.jar in ANT_HOME/lib. 
+     -> All JUNit test must finish with *Test.java 
+     
+  The following variables can be used in project.properties and will
+  be replaced at runtime with the correct information:
+  
+  These can be used to add specific path directories.
+  
+  The following targets exists:
+  
+all               Build and test everything; create a distribution, optionally install using freepascal
+clean             Delete all generated files and directories. 
+dist              Produce the distributables 
+distclean         Clean up the distribution files only. 
+docs              Generate all documentation. 
+init              Initialize the build: create directories, call <tstamp> and other common actions. 
+test              Run the unit tests using freepascal in path
+build             Build using java compiler in path
+help
+
+  
+-->
+    <description>Sample build script</description>
+    
+    
+    
+  <!-- Internal properties -->
+    
+  <!-- set global properties for this build -->
+  
+
+  <property name="src" value="src"/>
+  <property name="bin" value="bin"/>
+  <property name="dist"  value="dist"/>
+  <property name="docs"  value="doc"/>
+  <property name="lib"  value="lib"/>
+  <property name="res"  value="res"/>
+  <property name="test"  value="test"/>
+  <property environment="env"/>
+  
+  
+  <property name="general_delete_file_patterns" 
+    value="**/*.aux  **/*.log  **/*.out **/*.toc **/*.tex **/*.tmp" />
+  <property name="build_delete_file_patterns" 
+    value="**/*.class **/*.bak **/*.dcu **/*.ppu **/*.ppw **/*.ppa **/*.ow **/*.oo2 **/*.ppo **/*.ol **/*.o **/*.obj **/*.aw **/*.tpw **/*.tpp **/*.tpu **/*.TPW **/*.TPP **/*.TPU" />
+  
+  <property file="project.properties" />
+
+  <target name="init">
+     
+    <!-- Create the target directories if they do not exist -->       
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${src}"/>
+    <mkdir dir="${bin}"/>
+    <mkdir dir="${lib}"/>
+    <mkdir dir="${docs}"/>
+    <mkdir dir="${docs}${file.separator}output/html"/>
+    <mkdir dir="${test}"/>
+    
+    <property name="build.resolved" location="${bin}" />
+    <property name="build.relative" value=".${file.separator}${bin}" />
+    
+    <property name="dir.units" value="" />     
+    <property name="dir.includes" value="" />     
+    <property name="dir.objects" value="" />     
+    <property name="defines" value="" />
+    
+    <filelist id="dirlist" dir="." files="${package.dir.units}" /> 
+    <pathconvert pathsep=" " property="package.dir.units.native" refid="dirlist">
+    </pathconvert>
+
+    <filelist id="dirlist.relative" dir="." files="${package.dir.units.native}" /> 
+    <pathconvert pathsep=" " property="package.dir.units.relative" refid="dirlist.relative">
+        <globmapper from="${basedir}${file.separator}*" to=".${file.separator}*" />
+     </pathconvert>
+
+
+    <filelist id="filelist" dir="." files="${package.file}" /> 
+       <pathconvert pathsep=" " property="package.file.native" refid="filelist">
+    </pathconvert>
+
+    <filelist id="filelist.relative" dir="." files="${package.file}" /> 
+    <pathconvert pathsep=" " property="package.file.native.relative" refid="filelist.relative">
+        <globmapper from="${basedir}${file.separator}*" to=".${file.separator}*" />
+     </pathconvert>
+    
+
+    <filelist id="tstdirlist" dir="." files="${package.dir.tests}" /> 
+       <pathconvert pathsep=" " property="package.dir.tests.native" refid="tstdirlist">
+    </pathconvert>
+
+    <filelist id="tstdirlist.relative" dir="." files="${package.dir.tests.native}" /> 
+    <pathconvert pathsep=" " property="package.dir.tests.relative" refid="tstdirlist.relative">
+        <globmapper from="${basedir}${file.separator}*" to=".${file.separator}*" />
+     </pathconvert>
+
+    
+    <filelist id="tstfilelist" dir="." files="${package.dir.tests}${file.separator}testit.pas" /> 
+       <pathconvert pathsep=" " property="package.file.tests.native" refid="tstfilelist">
+    </pathconvert>
+    
+  </target>
+  
+  <target name="all" depends="init">
+    <echo>Building...</echo>
+    <antcall target="docs" />
+    <antcall target="build" />
+    <antcall target="dist" />
+
+    <antcall target="build" />
+    <antcall target="test" />
+  </target>
+  
+  
+  <target name="help" depends="init">
+    <echo level="info">
+all               Build and test everything; create a distribution
+clean             Delete all generated files and directories. 
+dist              Produce the distributables 
+distclean         Clean up the distribution files only. 
+docs              Generate all documentation. 
+init              Initialize the build: create directories
+test              Run the unit tests using freepascal in path
+build             Build using java compiler in path
+help
+
+    </echo>
+  </target>
+
+
+  <target name="build" depends="init" description="Compile the source " >
+    <clean />
+    <javac 
+       includeantruntime="false"
+       srcdir="${src}" 
+       destdir="${bin}" 
+       debug="false"
+    />
+    <!-- We only give a warning and never fail -->
+    <copy failonerror="false" todir="${bin}/${res}" >  
+      <fileset dir="${src}/${res}"/>
+    </copy>    
+  </target>
+  
+  <target name="test" depends="build" description="Run the unitary tests " >
+  
+<path id="master-classpath">
+  <fileset dir="${env.ANT_HOME}/lib">
+    <include name="*.jar"/>
+  </fileset>
+
+  <pathelement path="${bin}"/>
+</path>  
+    <javac 
+       includeantruntime="false"
+       srcdir="${src}" 
+       destdir="${bin}" 
+       debug="true"
+    />
+    <!-- Compile the unitary tests -->
+    <javac 
+       includeantruntime="false"
+       srcdir="${test}" 
+       destdir="${bin}" 
+       debug="true"
+     >  
+      <classpath refid="master-classpath"/>
+    </javac>
+    
+    <!-- We only give a warning and never fail -->
+    <copy failonerror="false" todir="${bin}/${res}">
+      <fileset dir="${test}/${res}"/>
+    </copy>    
+    
+    
+  <junit>
+    <classpath>
+      <pathelement location="${bin}" />    
+    </classpath>    
+    <batchtest>
+       <fileset dir="${test}">
+            <include name="**/*Test*" />
+       </fileset>
+    </batchtest>
+    <formatter type="brief" usefile="false"/>
+  </junit>    
+  </target>
+
+
+<target name="distclean" depends="init" description="Clean the distribution files">
+     <delete>
+       <fileset dir="${dist}" includes="*.*"/>
+    </delete>
+</target>
+  
+
+  <!-- Prepare a distribution zip file. Requires package.properties to be present and valid -->
+  <target name="dist" depends="init" description="Generate the distribution" >
+        
+    <property file="package.properties" />    
+    <!-- Create the distribution packages -->
+    <tstamp>
+       <format property="current_day" pattern="dd" />
+       <format property="current_month" pattern="MM" />
+       <format property="current_year" pattern="yyyy" />
+    </tstamp>
+    
+    <copy overwrite="true" file="master_pad_file.xml" tofile="pad_file.xml" />
+    <replace file="pad_file.xml"> 
+      <replacefilter 
+         token="&lt;Primary_Download_URL>" 
+        value="&lt;Primary_Download_URL>${package.url}${package.name}-${package.version}-src.zip"/>
+        
+      <replacefilter 
+         token="&lt;Program_Version>" 
+        value="&lt;Program_Version>${package.version}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Release_Month>" 
+        value="&lt;Program_Release_Month>${current_month}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Release_Year>" 
+        value="&lt;Program_Release_Year>${current_year}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Release_Day>" 
+        value="&lt;Program_Release_Day>${current_day}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Name>" 
+        value="&lt;Program_Name>${package.title}"/>
+    </replace>
+    
+    <!-- Create the source package that contains the following information
+          - test directory
+          - tst directory
+          - docs directory
+          - src directory 
+    -->      
+    <zip destfile=".${file.separator}${dist}${file.separator}${package.name}-${package.version}-src.zip" comment="${package.title} source package, version ${package.version}">
+      <zipfileset dir="${basedir}" includes="pad_file.xml ${src}/** ${docs}/output/** ${package.documents} ${test}/** ${bin} ${lib}" prefix="${package.name}" />
+    </zip>
+    
+    <zip destfile=".${file.separator}${dist}${file.separator}${package.name}-${package.version}-docs.zip" comment="${package.title} documentation, version ${package.version}">
+      <zipfileset dir="${basedir}" includes="pad_file.xml ${docs}/output/** ${package.documents}" prefix="${package.name}" />
+    </zip>
+    
+
+    <!-- Set package,internal.arch to correct string depending on the compiler type -->    
+    <condition property="package.internal.arch" else="${package.cpu}-${package.os}" value="${package.cpu}-${package.os}-${package.compiler}${package.compiler.version}">
+    <istrue value="${package.library}"/>
+    </condition>
+    
+    <dist-bin 
+       package-name="${package.name}"  
+       package-title="${package.title}" 
+       package-version="${package.version}"
+       package-arch="${package.internal.arch}" 
+       package-documents="${package.documents}"
+       package-binaries="${package.binaries}" 
+       package-url="${package.url}"
+       />
+  </target>
+
+  
+  <target name="docs" description="Create the automated java documentation" depends="init">
+      <javadoc
+           sourcepath="${src}"
+           defaultexcludes="yes"
+           destdir="${docs}${file.separator}output/html"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="${package.name}">
+     </javadoc>     
+  </target>
+
+  <target name="clean" description="clean up" depends="init">
+    <clean />
+  </target>
+  
+
+
+<macrodef name="clean" description="Clean macro" backtrace="true">
+  <sequential>
+    <!-- Delete the ${bin} directory trees -->
+     <delete file="pad_file.xml" />
+     <delete>
+        <fileset dir="." includes="pad_file?.xml"/>
+        <fileset dir="." includes="package.properties"/>
+     </delete>
+     <delete>
+       <fileset dir="." includes="${general_delete_file_patterns}"/>
+     </delete>
+     
+    <delete includeemptydirs="true">
+      <fileset dir="${bin}" includes="**/*"/>
+    </delete>     
+  </sequential>
+</macrodef>
+
+
+
+<!-- Create a zip distribution file for the specified platform with
+     the specified parameters -->
+<macrodef name="dist-bin" description="Create binary distributable macro" backtrace="true">
+   <attribute name="package-name" description="The package name" />
+   <attribute name="package-title" description="The package title" />
+   <attribute name="package-version" description="Package version" />
+   <attribute name="package-arch" description="Package target arch" />
+   <attribute name="package-documents" description="Package documents" />
+   <attribute name="package-binaries" description="Package binaries" />
+   <attribute name="package-url" description="Package url" />
+
+  <sequential>
+    <local name="current_day" />
+    <local name="current_month" />
+    <local name="current_year" />
+    
+    <!-- Create the distribution packages -->
+    <tstamp>
+       <format property="current_day" pattern="dd" />
+       <format property="current_month" pattern="MM" />
+       <format property="current_year" pattern="yyyy" />
+    </tstamp>
+    
+    <copy overwrite="true" file="master_pad_file.xml" tofile="pad_file.xml" />
+    <replace file="pad_file.xml"> 
+      <replacefilter 
+         token="&lt;Primary_Download_URL>" 
+        value="&lt;Primary_Download_URL>@{package-url}@{package-name}-@{package-version}-@{package-arch}.zip"/>
+        
+      <replacefilter 
+         token="&lt;Program_Version>" 
+        value="&lt;Program_Version>@{package-version}"/>
+
+      <replacefilter 
+         token="&lt;Program_OS_Support>" 
+        value="&lt;Program_OS_Support>Java"/>
+      <replacefilter 
+         token="&lt;Program_Release_Month>" 
+        value="&lt;Program_Release_Month>${current_month}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Release_Year>" 
+        value="&lt;Program_Release_Year>${current_year}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Release_Day>" 
+        value="&lt;Program_Release_Day>${current_day}"/>
+        
+      <replacefilter 
+         token="&lt;Program_Name>" 
+        value="&lt;Program_Name>@{package-title}"/>
+    </replace>
+   
+    <jar destfile="${dist}/@{package-name}.jar" basedir="${bin}">  
+   <manifest>
+      <!-- Who is building this jar? -->
+      <attribute name="Built-By" value="${user.name}"/>
+      <!-- Information about the program itself -->
+      <attribute name="Implementation-Vendor" value="Optima SC Inc."/>
+      <attribute name="Implementation-Title" value="@{package-name}"/>
+      <attribute name="Implementation-Version" value="@{package-version}"/>
+    </manifest>    
+    </jar>
+
+  </sequential>
+</macrodef>
+
+
+</project>

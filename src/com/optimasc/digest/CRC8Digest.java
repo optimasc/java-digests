@@ -1,5 +1,5 @@
 /* Copyright (c) 2015 Optima SC Inc. All rights reserved.
- * 
+ *
  * See License.txt for more information on the license and usage terms of
  * this source code.
  *
@@ -8,7 +8,7 @@ package com.optimasc.digest;
 
 import java.security.MessageDigestSpi;
 
-/** 
+/**
 *
 *  CRC-8 hash algorithm, as implemented in the FLAC audio codec, as well
 *  as being defined in the System Management Bus (SMBus) Specification.
@@ -16,7 +16,7 @@ import java.security.MessageDigestSpi;
 *  The output size of the hash is on 8-bits.
 *
 *  The identifier for this MessageDigest provider is "CRC8".
-*  
+*
 *  @author Carl Eric Codere
 *
 */
@@ -25,7 +25,7 @@ public final class CRC8Digest extends MessageDigestSpi
   protected int hashValue = 0;
 
   /* CRC-8, poly = x^8 + x^2 + x^1 + x^0, init = 0 */
-  private static final int crc8table[] = 
+  private static final int crc8table[] =
       {
                   0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15,
                   0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
@@ -92,11 +92,11 @@ public final class CRC8Digest extends MessageDigestSpi
   {
     hashValue = 0;
   }
-  
+
   protected int engineGetDigestLength()
   {
     return 1;
   }
-  
+
 
 }

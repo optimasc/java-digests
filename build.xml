@@ -209,7 +209,7 @@ help
   
 
   <!-- Prepare a distribution zip file. Requires package.properties to be present and valid -->
-  <target name="dist" depends="init" description="Generate the distribution" >
+  <target name="dist" depends="init,build,docs" description="Generate the distribution" >
         
     <property file="package.properties" />    
     <!-- Create the distribution packages -->
@@ -307,6 +307,8 @@ help
      <delete>
        <fileset dir="." includes="${general_delete_file_patterns}"/>
      </delete>
+     
+     <delete dir="${docs}${file.separator}output/html" />
      
     <delete includeemptydirs="true">
       <fileset dir="${bin}" includes="**/*"/>
